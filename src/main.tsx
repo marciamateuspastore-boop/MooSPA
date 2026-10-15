@@ -11,5 +11,9 @@ import '@fontsource/manrope/latin-700.css'
 import '@fontsource/manrope/latin-800.css'
 import App from './App'
 import './styles.css'
+import './pwa.css'
+import './theme.css'
+import { startPwa } from './pwa-registration'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(<React.StrictMode><App /></React.StrictMode>)
+startPwa()

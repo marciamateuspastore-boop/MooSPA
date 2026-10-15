@@ -1,0 +1,29 @@
+.pwa-actions{display:flex;align-items:center;gap:10px}
+.install-app-button,.pwa-update-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:38px;border-radius:9px;padding:0 12px;background:#edf2e6;color:#486337;font-size:11px;font-weight:600;white-space:nowrap}
+.install-app-button:hover,.pwa-update-button:hover{background:#dfe9d2}
+.pwa-update-button{background:#f3eddc;color:#8b713a}
+.pwa-offline{display:inline-flex;align-items:center;gap:6px;color:#7c755b;font-size:10px}
+.install-intro{display:flex;align-items:center;gap:17px;margin:25px 0}
+.install-intro img{flex-shrink:0;border-radius:17px;width:64px;height:64px;box-shadow:0 4px 12px #2c483014}
+.install-intro h3{font-size:17px;letter-spacing:-.5px;font-weight:600;line-height:1.5}
+.install-intro p{font-size:12px;line-height:1.8;color:#6d7864;margin-top:5px}
+.install-native{margin-bottom:20px}
+.install-platforms{display:flex;gap:5px;padding:4px;border-radius:10px;background:#f3f5ee;margin:20px 0 8px}
+.install-platforms button{flex:1;min-height:39px;border-radius:7px;color:#6d7a62;font-size:12px}
+.install-platforms button.selected{background:#fff;color:#3f5b2e;box-shadow:0 2px 5px #2a42100a;font-weight:600}
+.install-steps{padding:0;list-style:none;margin:0 0 23px;counter-reset:install-step}
+.install-steps li{display:flex;gap:13px;align-items:flex-start;padding:16px 0;border-bottom:1px solid #edf1e6}
+.install-steps li:last-child{border-bottom:0;padding-bottom:0}
+.install-steps li>span{width:33px;height:33px;display:grid;place-items:center;border-radius:10px;background:#f0f4e8;color:#7d9661;flex-shrink:0}
+.install-steps strong{font-size:12px;font-weight:600;color:#4e6540}
+.install-steps p{font-size:11px;color:#6e7c61;line-height:1.8;margin-top:4px}
+.install-offline-note{display:flex;gap:10px;align-items:flex-start;padding:15px;border:1px solid #e6ebdd;border-radius:11px;background:#f7f9f2;color:#6d7b5e}
+.install-offline-note.ready{background:#edf5e4;border-color:#e1ebd5;color:#5d7845}
+.install-offline-note>svg{margin-top:2px}
+.install-offline-note strong{font-size:11px;font-weight:600}
+.install-offline-note p{font-size:10px;line-height:1.8;margin-top:5px}
+.install-feedback{font-size:12px;line-height:1.8;color:#526f3b;background:#f2f6e9;border-radius:9px;padding:12px;margin:14px 0}
+@media(max-width:1100px){.topbar-actions{gap:12px}.environment-pill{display:none}}
+@media(max-width:760px){.pwa-actions{gap:5px}.install-app-button,.pwa-update-button{width:36px;height:38px;padding:0}.install-app-button>span,.pwa-update-button>span,.pwa-offline>span{display:none}.topbar-actions{gap:6px}.pwa-offline{width:22px;justify-content:center}}
+@media(max-width:590px){.install-intro{gap:13px;margin-top:22px}.install-intro img{width:57px;height:57px;border-radius:15px}.install-intro h3{font-size:15px}.install-intro p{font-size:11px}.install-steps p{font-size:12px}.install-steps strong{font-size:13px}.install-offline-note strong{font-size:12px}.install-offline-note p{font-size:11px}.install-platforms button{min-height:42px}.install-steps li{padding:15px 0}.topbar{padding-top:env(safe-area-inset-top);height:calc(65px + env(safe-area-inset-top))}.mobile-nav{padding-bottom:calc(8px + env(safe-area-inset-bottom))}.content{padding-bottom:calc(90px + env(safe-area-inset-bottom))}.toast{bottom:calc(82px + env(safe-area-inset-bottom))}}
+@media(max-width:360px){.topbar{padding-left:14px;padding-right:14px}.logo.compact>span{font-size:21px}.topbar-actions{gap:3px}.pwa-actions{gap:2px}.install-app-button,.pwa-update-button{width:32px}.pwa-offline{width:18px}.install-intro h3{font-size:14px}}

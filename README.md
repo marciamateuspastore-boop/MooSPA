@@ -5,6 +5,29 @@ Demo de produto da estação automatizada ECV-01, com React, TypeScript e Vite. 
 - **Demo:** https://marciamateuspastore-boop.github.io/MooSPA/
 - **Repositório:** https://github.com/marciamateuspastore-boop/MooSPA
 
+## Instalar no celular
+
+Abra a demo pelo navegador do celular e toque no ícone **Instalar MooSPA** no cabeçalho. No desktop, o botão aparece como **Instalar app**.
+
+- **Android / Chrome:** use **Instalar agora** quando disponível, ou o menu do navegador → **Instalar app / Adicionar à tela inicial**.
+- **iPhone / iPad:** abra no Safari → **Compartilhar → Adicionar à Tela de Início**. Se aparecer **Abrir como App da Web**, mantenha ativado e confirme em **Adicionar**.
+
+A instalação cria um ícone próprio e abre em modo de aplicativo. Continue usando o mesmo endereço do GitHub Pages; não há servidor adicional nem publicação em loja de aplicativos.
+
+## Offline e atualizações
+
+Após uma primeira visita com internet, o aplicativo prepara imagens, fontes e código para abrir offline. O painel de instalação mostra **Pronto para usar sem internet** quando essa preparação termina. O cache contém apenas arquivos estáticos da demo: animais, agenda e simulações continuam em memória e voltam aos valores iniciais ao recarregar.
+
+Uma versão nova é preparada em segundo plano. O botão **Atualizar MooSPA** permite aplicar a versão quando for conveniente; atualizar recarrega o app e reinicia a sessão demonstrativa. A versão também pode ser ativada quando todas as abas e janelas antigas forem fechadas. Nenhuma atualização força a perda da sessão em andamento.
+
+O service worker é gerado a cada build com uma versão baseada no conteúdo dos arquivos. Seu escopo é o diretório da demo, inclusive em `/MooSPA/`; ele não apaga caches de outros projetos na mesma origem do GitHub Pages. Como qualquer cache do navegador, pode ser removido pelo usuário ou pelo sistema para liberar espaço.
+
+Para testar instalação e offline localmente, use `pnpm build` e `pnpm preview`. O comando `pnpm dev` mantém o service worker desativado para não armazenar versões de desenvolvimento.
+
+## Tema claro e escuro
+
+O botão de lua/sol no cabeçalho alterna o modo escuro. A aparência acompanha a preferência do sistema até a primeira troca manual da sessão. A escolha fica somente em memória; ao recarregar, o app volta a seguir o sistema.
+
 ## Rodar localmente
 
 No Windows, dê dois cliques em **Iniciar-MooSPA.cmd** e abra o endereço mostrado no terminal. O atalho procura pnpm, o runtime local do Codex ou npm. Mantenha a janela aberta enquanto explora.
@@ -61,6 +84,11 @@ Os totais de sete e trinta dias são cenários ilustrativos. O gráfico de hoje 
 - `src/model.ts`: dados fictícios, guardas do ciclo e exportação CSV.
 - `src/styles.css`: design responsivo, navegação mobile e acessibilidade.
 - `src/model.test.ts`: verificação das regras centrais do ciclo.
+- `src/PwaControls.tsx` e `src/pwa.css`: instalação, instruções para celular e atualização opcional.
+- `src/ThemeControls.tsx` e `src/theme.css`: alternância de tema e aparência escura em todas as telas.
+- `src/pwa-registration.ts`: registro, estado offline e aplicação explícita de novas versões.
+- `public/manifest.webmanifest` e `public/icons/`: identidade e ícones do aplicativo instalado.
+- `scripts/build-pwa.mjs`: geração do service worker e do cache de arquivos estáticos após o build.
 
 ## Créditos visuais
 
