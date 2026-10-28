@@ -72,9 +72,9 @@ Neste repositório, a publicação usa GitHub Actions. Novos pushes para `main` 
 
 Baseado no PDF `Projeto_Estacao_Automatizada_Vacas_Leiteiras_10_paginas.pdf` fornecido pelo solicitante. O projeto físico é conceitual. A interface não representa equipamento construído, desempenho medido ou liberação técnica.
 
-A data da fazenda é fixa em 14/10/2026. Animais, operador e registros são fictícios. As mudanças são perdidas ao recarregar. A lavagem é consumida ao entrar na etapa correspondente, inclusive quando a passagem é interrompida depois. Outra passagem do mesmo animal não repete a lavagem. O módulo veterinário é apenas informativo; não há seleção de produto, dose ou aplicação.
+A data e o relógio usam o horário local do dispositivo, no site e no app instalado, inclusive offline. O relógio atualiza a cada segundo, acompanha a virada do dia e se sincroniza ao voltar para a aba. Agenda, seletor de período, formulário e nome do CSV usam a data atual. A saudação acompanha manhã, tarde e noite. Os horários dos registros e cuidados iniciais continuam ilustrativos; novas simulações registram o horário real de sua execução. Animais, operador e registros são fictícios. As mudanças são perdidas ao recarregar. A lavagem é consumida ao entrar na etapa correspondente, inclusive quando a passagem é interrompida depois. Outra passagem do mesmo animal não repete a lavagem. O módulo veterinário é apenas informativo; não há seleção de produto, dose ou aplicação.
 
-Os totais de sete e trinta dias são cenários ilustrativos. O gráfico de hoje adiciona as novas passagens concluídas às 10h, horário da sessão simulada. A lista de histórico é um recorte inicial mais os ciclos realizados na sessão; não contém todos os registros agregados dos indicadores. Lavagens interrompidas ficam em revisão, sem liberar nova lavagem e sem contar como higienização concluída.
+Os totais de sete e trinta dias são cenários ilustrativos. O gráfico de hoje adiciona cada nova passagem concluída no horário em que foi simulada; os dias da visão semanal acompanham a data atual. A lista de histórico é um recorte inicial mais os ciclos realizados na sessão; não contém todos os registros agregados dos indicadores. Lavagens interrompidas ficam em revisão, sem liberar nova lavagem e sem contar como higienização concluída.
 
 ## Estrutura
 

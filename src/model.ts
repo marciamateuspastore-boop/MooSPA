@@ -1,4 +1,4 @@
-export const DEMO_DATE = '2026-10-14'
+import { localDateKey } from './time'
 export type Animal = { id: string; name: string; breed: string; group: string; washed: boolean; washIncomplete: boolean; lastVisit: string; visits: number; attention: boolean }
 export type Schedule = { id: string; time: string; title: string; detail: string; type: 'care' | 'maintenance' | 'review'; done: boolean }
 export type Activity = { id: string; animalId: string; name: string; time: string; kind: string; status: 'complete' | 'interrupted' | 'blocked'; water: number }
@@ -38,10 +38,21 @@ export const stages = [
   { title: 'Saída livre', description: 'Finalizando o registro da passagem.' },
 ]
 export function cycleWater(cycle: Cycle): number { return cycle.washEligible && cycle.stage >= 3 ? 0.8 : 0 }
+export function dailyChartData(activities: Activity[]) {
+  const hours = new Map([[6, 1], [7, 3], [8, 6], [9, 4], [10, 0], [11, 0], [12, 0], [13, 0]])
+  const initialIds = new Set(initialActivities.map(activity => activity.id))
+  for (const activity of activities) {
+    if (activity.status !== 'complete' || initialIds.has(activity.id)) continue
+    const hour = Number(activity.time.split(':')[0])
+    if (Number.isInteger(hour) && hour >= 0 && hour < 24) hours.set(hour, (hours.get(hour) ?? 0) + 1)
+  }
+  const entries = [...hours].sort(([a], [b]) => a - b)
+  return { values: entries.map(([, count]) => count), labels: entries.map(([hour]) => `${String(hour).padStart(2, '0')}h`) }
+}
 export function downloadCsv(activities: Activity[]) {
   const rows = [['Animal', 'Nome', 'Horário', 'Atividade', 'Estado', 'Água (L)', 'Origem'], ...activities.map(a => [a.animalId, a.name, a.time, a.kind, a.status === 'complete' ? 'Concluído' : a.status === 'blocked' ? 'Bloqueado' : 'Interrompido', String(a.water).replace('.', ','), 'Dados fictícios — demo'])]
   const csv = '\uFEFF' + rows.map(row => row.map(v => '"' + v.replaceAll('"', '""') + '"').join(';')).join('\r\n')
   const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8;' }))
-  const a = document.createElement('a'); a.href = url; a.download = `moospa-demo-${DEMO_DATE}.csv`; a.click()
+  const a = document.createElement('a'); a.href = url; a.download = `moospa-demo-${localDateKey()}.csv`; a.click()
   setTimeout(() => URL.revokeObjectURL(url), 1000)
 }

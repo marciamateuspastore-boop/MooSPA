@@ -3,6 +3,8 @@ import type { ReactNode } from 'react'
 import { Activity, ArrowUpRight, CalendarDays, Check, CheckCheck, ChevronRight, Clock3, Droplets, Heart, House, Plus, ScanLine, ShieldCheck, UsersRound, Waves, Wrench, X, ChartNoAxesCombined } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import type { Activity as ActivityRecord, Animal, Schedule } from './model'
+import { dailyChartData } from './model'
+import { weekLabels } from './time'
 
 export type Page = 'overview' | 'station' | 'herd' | 'schedule' | 'reports'
 export const nav: { id: Page; label: string; short: string; icon: LucideIcon }[] = [
@@ -42,10 +44,11 @@ export function Dialog({ title, children, onClose }: { title: string; children: 
     }
   }}><div className="dialog-header"><h2>{title}</h2><button className="icon-button" aria-label="Fechar janela" onClick={onClose}><X size={20} /></button></div>{children}</dialog>
 }
-export function Chart({ range = 'today', todayExtra = 0 }: { range?: string; todayExtra?: number }) {
+export function Chart({ range = 'today', activities, now }: { range?: string; activities: ActivityRecord[]; now: Date }) {
   const [hover, setHover] = useState<number | null>(null)
-  const values = range === 'today' ? [1, 3, 6, 4, todayExtra, 0, 0, 0] : range === 'week' ? [12, 16, 13, 19, 15, 17, 14] : [68, 76, 82, 91]
-  const labels = range === 'today' ? ['06h', '07h', '08h', '09h', '10h', '11h', '12h', '13h'] : range === 'week' ? ['Qui', 'Sex', 'Sáb', 'Dom', 'Seg', 'Ter', 'Qua'] : ['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4']
+  const daily = dailyChartData(activities)
+  const values = range === 'today' ? daily.values : range === 'week' ? [12, 16, 13, 19, 15, 17, 14] : [68, 76, 82, 91]
+  const labels = range === 'today' ? daily.labels : range === 'week' ? weekLabels(now) : ['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4']
   const max = Math.max(...values) * 1.2
   return <div className="chart-wrap"><div className="chart-key"><span><i /> Passagens</span><span className="muted">{hover !== null ? `${labels[hover]} · ${values[hover]} passagens` : 'Dados ilustrativos'}</span></div><div className="bar-chart" aria-label="Passagens por horário">{values.map((v, i) => <button className={`bar-column ${i === 3 ? 'highlight' : ''}`} key={labels[i]} aria-label={`${labels[i]}: ${v} passagens`} onMouseEnter={() => setHover(i)} onMouseLeave={() => setHover(null)} onFocus={() => setHover(i)} onBlur={() => setHover(null)} onClick={() => setHover(i)}><div className="bar-track"><div className="bar" style={{ height: `${Math.max(v / max * 100, 3)}%` }}><span>{v || '–'}</span></div></div><span className="bar-label">{labels[i]}</span></button>)}</div></div>
 }

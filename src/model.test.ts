@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { createCycle, cycleWater, initialAnimals } from './model'
+import { createCycle, cycleWater, dailyChartData, initialActivities, initialAnimals } from './model'
 describe('regras da simulação', () => {
   it('libera água apenas na primeira passagem elegível', () => {
     expect(createCycle(initialAnimals[8], 'normal', false).washEligible).toBe(true)
@@ -23,5 +23,18 @@ describe('regras da simulação', () => {
     expect(cycleWater({ ...cycle, stage: 2 })).toBe(0)
     expect(cycleWater({ ...cycle, stage: 3 })).toBe(0.8)
     expect(cycleWater({ ...cycle, stage: 5, status: 'interrupted' })).toBe(0.8)
+  })
+  it('agrupa novas passagens por horário real, inclusive fora da janela inicial', () => {
+    const data = dailyChartData([...initialActivities,
+      { ...initialActivities[0], id: 'new-1', time: '00:01' },
+      { ...initialActivities[0], id: 'new-2', time: '23:59' },
+      { ...initialActivities[0], id: 'new-3', time: '23:50' },
+      { ...initialActivities[0], id: 'blocked', time: '23:51', status: 'blocked' },
+    ])
+    expect(data.labels[0]).toBe('00h')
+    expect(data.values[0]).toBe(1)
+    expect(data.labels.at(-1)).toBe('23h')
+    expect(data.values.at(-1)).toBe(2)
+    expect(data.values.reduce((sum, count) => sum + count, 0)).toBe(17)
   })
 })
